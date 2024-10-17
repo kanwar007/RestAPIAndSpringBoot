@@ -30,11 +30,12 @@ public class UserDaoService {
 
    public  User getUserId(int id){
     Predicate<? super User> predicate = user -> user.getId().equals(id);
-    return listUser.stream().filter(predicate).findFirst().get();
+    return listUser.stream().filter(predicate).findFirst().orElse(null);
    }
-   public void addUser(User user){
+   public User addUser(User user){
         user.setId(count++);
         listUser.add(user);
+        return user;
      }
    public void deleteUser(int id ){
       Predicate<? super User> predicate = user -> user.getId().equals(id);
